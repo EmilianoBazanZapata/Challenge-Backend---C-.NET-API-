@@ -1,4 +1,5 @@
 using API.Data;
+using API.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,7 +32,8 @@ namespace API
             //agrego el contexto de la base de datos 
             services.AddDbContext<DataBaseContext>(options =>
                      options.UseSqlServer(Configuration.GetConnectionString("DB")));
-
+            //agrego la referencia del automapper Initializer por inyeccion de dependencias
+            services.AddAutoMapper(typeof(MapperInitializer));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
