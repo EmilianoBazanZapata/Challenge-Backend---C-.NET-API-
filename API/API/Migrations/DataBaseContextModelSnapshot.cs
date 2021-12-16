@@ -60,7 +60,9 @@ namespace API.Migrations
             modelBuilder.Entity("API.Data.Gender", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -75,6 +77,32 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Image = "Anonymous.png",
+                            Name = "Accion"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Image = "Anonymous.png",
+                            Name = "Terror"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Image = "Anonymous.png",
+                            Name = "Suspenso"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Image = "Anonymous.png",
+                            Name = "Amor"
+                        });
                 });
 
             modelBuilder.Entity("API.Data.Movie", b =>
@@ -86,6 +114,9 @@ namespace API.Migrations
 
                     b.Property<DateTime>("DataCreation")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("GenderId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -101,6 +132,8 @@ namespace API.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.HasKey("IdMovie");
+
+                    b.HasIndex("GenderId");
 
                     b.ToTable("Movies");
                 });
@@ -120,13 +153,13 @@ namespace API.Migrations
                     b.ToTable("CharacterMovie");
                 });
 
-            modelBuilder.Entity("API.Data.Gender", b =>
+            modelBuilder.Entity("API.Data.Movie", b =>
                 {
-                    b.HasOne("API.Data.Movie", null)
-                        .WithMany("Genders")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("API.Data.Gender", "Gender")
+                        .WithMany("Movies")
+                        .HasForeignKey("GenderId");
+
+                    b.Navigation("Gender");
                 });
 
             modelBuilder.Entity("CharacterMovie", b =>
@@ -144,9 +177,9 @@ namespace API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("API.Data.Movie", b =>
+            modelBuilder.Entity("API.Data.Gender", b =>
                 {
-                    b.Navigation("Genders");
+                    b.Navigation("Movies");
                 });
 #pragma warning restore 612, 618
         }

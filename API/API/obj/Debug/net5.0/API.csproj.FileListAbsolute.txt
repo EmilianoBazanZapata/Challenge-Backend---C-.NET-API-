@@ -86,3 +86,5 @@ C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\obj\Deb
 C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\obj\Debug\net5.0\ref\API.dll
 C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\obj\Debug\net5.0\API.pdb
 C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\obj\Debug\net5.0\API.genruntimeconfig.cache
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

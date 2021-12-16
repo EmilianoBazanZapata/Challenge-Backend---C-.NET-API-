@@ -7,7 +7,7 @@ namespace API.Data
 {
     public class Movie
     {
-        public Movie() 
+        public Movie()
         {
             this.Characters = new HashSet<Character>();
         }
@@ -18,14 +18,13 @@ namespace API.Data
         public string Image { get; set; }
         [Required(ErrorMessage = "The Title is Required")]
         [StringLength(maximumLength: 250, ErrorMessage = "The Title Is Too Long")]
-        public string  Title { get; set; }
+        public string Title { get; set; }
         [Required(ErrorMessage = "The Data Creation is Required")]
         public DateTime DataCreation { get; set; }
         [Required(ErrorMessage = "Qualification is Required")]
         [Range(1, 5)]
         public int Qualification { get; set; }
-        [ForeignKey("Id")]
-        public virtual ICollection<Gender> Genders { get; set; }
+        public Gender Gender { get; set; }
         public virtual ICollection<Character> Characters { get; set; }
     }
 }
