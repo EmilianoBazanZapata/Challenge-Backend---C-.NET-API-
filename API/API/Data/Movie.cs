@@ -14,7 +14,7 @@ namespace API.Data
         [Key]
         public int IdMovie { get; set; }
         [Required(ErrorMessage = "The Image Name is Required")]
-        [StringLength(maximumLength: 1000, ErrorMessage = "Gender Name Is Too Long")]
+        [StringLength(maximumLength: 1000, ErrorMessage = "Image Name Is Too Long")]
         public string Image { get; set; }
         [Required(ErrorMessage = "The Title is Required")]
         [StringLength(maximumLength: 250, ErrorMessage = "The Title Is Too Long")]
