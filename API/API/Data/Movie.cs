@@ -7,8 +7,12 @@ namespace API.Data
 {
     public class Movie
     {
+        public Movie() 
+        {
+            this.Characters = new HashSet<Character>();
+        }
         [Key]
-        public int Id { get; set; }
+        public int IdMovie { get; set; }
         [Required(ErrorMessage = "The Image Name is Required")]
         [StringLength(maximumLength: 1000, ErrorMessage = "Gender Name Is Too Long")]
         public string Image { get; set; }
@@ -20,8 +24,8 @@ namespace API.Data
         [Required(ErrorMessage = "Qualification is Required")]
         [Range(1, 5)]
         public int Qualification { get; set; }
-        public int IdGender { get; set; }
-        [ForeignKey("IdGender")]
+        [ForeignKey("Id")]
         public virtual ICollection<Gender> Genders { get; set; }
+        public virtual ICollection<Character> Characters { get; set; }
     }
 }

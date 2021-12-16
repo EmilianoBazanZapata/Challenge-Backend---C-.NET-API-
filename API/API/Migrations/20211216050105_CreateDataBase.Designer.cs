@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20211216032133_CreateDataBase")]
+    [Migration("20211216050105_CreateDataBase")]
     partial class CreateDataBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,9 +21,9 @@ namespace API.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("API.Data.Characters", b =>
+            modelBuilder.Entity("API.Data.Character", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdCaharacter")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -35,9 +35,6 @@ namespace API.Migrations
                         .IsRequired()
                         .HasMaxLength(5000)
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("IdCaharacter")
-                        .HasColumnType("int");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -57,9 +54,7 @@ namespace API.Migrations
                     b.Property<float>("Weight")
                         .HasColumnType("real");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdCaharacter");
+                    b.HasKey("IdCaharacter");
 
                     b.ToTable("Characters");
                 });
@@ -67,11 +62,6 @@ namespace API.Migrations
             modelBuilder.Entity("API.Data.Gender", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("IdGender")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
@@ -86,26 +76,18 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdGender");
-
                     b.ToTable("Genders");
                 });
 
             modelBuilder.Entity("API.Data.Movie", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("IdMovie")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DataCreation")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("IdGender")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdMovie")
-                        .HasColumnType("int");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -120,62 +102,53 @@ namespace API.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdMovie");
+                    b.HasKey("IdMovie");
 
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("API.Data.MovieAndCaharacter", b =>
+            modelBuilder.Entity("CharacterMovie", b =>
                 {
-                    b.Property<int>("IdMovieAndCharacter")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("IdCaharacter")
+                    b.Property<int>("CharactersIdCaharacter")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdMovie")
+                    b.Property<int>("MoviesIdMovie")
                         .HasColumnType("int");
 
-                    b.HasKey("IdMovieAndCharacter");
+                    b.HasKey("CharactersIdCaharacter", "MoviesIdMovie");
 
-                    b.ToTable("MovieAndCaharacters");
-                });
+                    b.HasIndex("MoviesIdMovie");
 
-            modelBuilder.Entity("API.Data.Characters", b =>
-                {
-                    b.HasOne("API.Data.MovieAndCaharacter", null)
-                        .WithMany("Characters")
-                        .HasForeignKey("IdCaharacter");
+                    b.ToTable("CharacterMovie");
                 });
 
             modelBuilder.Entity("API.Data.Gender", b =>
                 {
                     b.HasOne("API.Data.Movie", null)
                         .WithMany("Genders")
-                        .HasForeignKey("IdGender");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("API.Data.Movie", b =>
+            modelBuilder.Entity("CharacterMovie", b =>
                 {
-                    b.HasOne("API.Data.MovieAndCaharacter", null)
-                        .WithMany("Movies")
-                        .HasForeignKey("IdMovie");
+                    b.HasOne("API.Data.Character", null)
+                        .WithMany()
+                        .HasForeignKey("CharactersIdCaharacter")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Data.Movie", null)
+                        .WithMany()
+                        .HasForeignKey("MoviesIdMovie")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("API.Data.Movie", b =>
                 {
                     b.Navigation("Genders");
-                });
-
-            modelBuilder.Entity("API.Data.MovieAndCaharacter", b =>
-                {
-                    b.Navigation("Characters");
-
-                    b.Navigation("Movies");
                 });
 #pragma warning restore 612, 618
         }

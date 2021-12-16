@@ -1,11 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.Data
 {
-    public class Characters
-    {   
+    public class Character
+    {
+        public Character()
+        {
+            this.Movies = new HashSet<Movie>();
+        }
         [Key]
-        public int Id { get; set; }
+        public int IdCaharacter { get; set; }
         [Required(ErrorMessage = "The Image Name is Required")]
         [StringLength(maximumLength: 1000, ErrorMessage = "Gender Name Is Too Long")]
         public string Image { get; set; }
@@ -24,5 +29,6 @@ namespace API.Data
         [Required(ErrorMessage = "The History is Required")]
         [StringLength(maximumLength: 5000, ErrorMessage = "Character History Is Too Long")]
         public string History { get; set; }
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }

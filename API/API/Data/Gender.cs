@@ -6,7 +6,7 @@ namespace API.Data
     {
         [Key]
         public int Id { get; set; }
-        [Required(ErrorMessage ="The Gender Name is Required")]
+        [Required(ErrorMessage = "The Gender Name is Required")]
         [StringLength(maximumLength: 250, ErrorMessage = "Gender Name Is Too Long")]
         public string Name { get; set; }
         [Required(ErrorMessage = "The Image Name is Required")]
