@@ -20,6 +20,8 @@ namespace API.Data
         [Required(ErrorMessage = "Qualification is Required")]
         [Range(1, 5)]
         public int Qualification { get; set; }
+        [ForeignKey(nameof(Gender))]
+        public int GenderId { get; set; }
         public Gender Gender { get; set; }
     }
 }

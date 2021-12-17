@@ -6,7 +6,7 @@ namespace API.Data
     public class Gender
     {
         [Key]
-        public int Id { get; set; }
+        public int IdGender { get; set; }
         [Required(ErrorMessage = "The Gender Name is Required")]
         [StringLength(maximumLength: 250, ErrorMessage = "Gender Name Is Too Long")]
         public string Name { get; set; }

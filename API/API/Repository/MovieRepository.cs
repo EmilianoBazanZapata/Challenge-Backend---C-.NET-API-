@@ -34,7 +34,7 @@ namespace API.Repository
 
         public async Task<IEnumerable<Movie>> GetAllByGender(int? gender)
         {
-            var result = await _context.Movies.Where(x => x.Gender.Id == gender).ToListAsync();
+            var result = await _context.Movies.Where(x => x.Gender.IdGender == gender).ToListAsync();
             return result;
         }
 

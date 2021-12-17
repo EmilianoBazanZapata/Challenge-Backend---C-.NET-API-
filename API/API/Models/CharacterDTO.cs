@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace API.Models
 {
-    public class CreateCharacter
+    public class CreateCharacterDTO
     {
         [Required(ErrorMessage = "The Image Name is Required")]
         [MaxLength(1000, ErrorMessage = "Gender Name Is Too Long")]

@@ -11,25 +11,25 @@ namespace API.Configurations.Entities
             builder.HasData(
                 new Gender
                 {
-                    Id = 1,
+                    IdGender = 1,
                     Name = "Accion",
                     Image = "Anonymous.png"
                 },
                 new Gender
                 {
-                    Id = 2,
+                    IdGender = 2,
                     Name = "Terror",
                     Image = "Anonymous.png"
                 },
                 new Gender
                 {
-                    Id = 3,
+                    IdGender = 3,
                     Name = "Suspenso",
                     Image = "Anonymous.png"
                 },
                 new Gender
                 {
-                    Id = 4,
+                    IdGender = 4,
                     Name = "Amor",
                     Image = "Anonymous.png"
                 }

@@ -1,4 +1,5 @@
-﻿using API.IRepository;
+﻿using API.Data;
+using API.IRepository;
 using API.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -26,18 +27,43 @@ namespace API.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetMovies() 
+        public async Task<IActionResult> GetMovies()
         {
-            try
-            {
+            //try
+            //{
                 var movies = await _unitofwork.Movies.GetAll();
                 var results = _mapper.Map<IList<MovieDTO>>(movies);
                 return Ok(results);
+            //}
+            //catch (Exception ex)
+            //{
+            //    _logger.LogError($"Someting Went Wrong In The {nameof(GetMovies)}", ex);
+            //    return StatusCode(500, "Internal Server Error. Please Try Again Later");
+            //}
+        }
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> AddMovie([FromBody] CreateMovieDTO movieDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError($"Invalid POST attempt in{nameof(AddMovie)}");
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var movie = _mapper.Map<Movie>(movieDTO);
+                await _unitofwork.Movies.Insert(movie);
+                await _unitofwork.Save();
+                return Ok();
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Someting Went Wrong In The {nameof(GetMovies)}",ex);
-                return StatusCode(500,"Internal Server Error. Please Try Again Later");
+
+                _logger.LogError($"Someting Went Wrong In The {nameof(GetMovies)}", ex);
+                return StatusCode(500, "Internal Server Error. Please Try Again Later");
             }
         }
     }

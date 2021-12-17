@@ -21,11 +21,11 @@ namespace API.Models
         [Required(ErrorMessage = "Qualification is Required")]
         [Range(1, 5)]
         public int Qualification { get; set; }
-        public int IdGender { get; set; }
+        public int GenderId { get; set; }
     }
     public class MovieDTO : CreateMovieDTO
     {
         public int Id { get; set; }
-        public IList<Character> Characters { get; set; }
+        public CharacterDTO character { get; set; }
     }
 }

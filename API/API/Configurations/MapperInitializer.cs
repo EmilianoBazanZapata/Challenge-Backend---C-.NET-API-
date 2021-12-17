@@ -8,9 +8,9 @@ namespace API.Entities
         public MapperInitializer()
         {
             CreateMap<Character, CharacterDTO>().ReverseMap();
-            CreateMap<Character, CreateCharacter>().ReverseMap();
+            CreateMap<Character, CreateCharacterDTO>().ReverseMap();
             CreateMap<Movie, MovieDTO>().ReverseMap();
-            CreateMap<Character, CreateMovieDTO>().ReverseMap();
+            CreateMap<Movie, CreateMovieDTO>().ReverseMap();
         }
     }
 }
