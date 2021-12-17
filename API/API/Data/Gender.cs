@@ -13,6 +13,5 @@ namespace API.Data
         [Required(ErrorMessage = "The Image Name is Required")]
         [StringLength(maximumLength: 1000, ErrorMessage = "Gender Name Is Too Long")]
         public string Image { get; set; }
-        public ICollection<Movie> Movies { get; set; }
     }
 }

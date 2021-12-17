@@ -1,34 +1,75 @@
-﻿using API.IRepository;
+﻿using API.Data;
+using API.IRepository;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace API.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        public Task Delete(int id)
+        private readonly DataBaseContext _context;
+        private readonly DbSet<T> _db;
+
+        public GenericRepository(DataBaseContext context)
         {
-            throw new System.NotImplementedException();
+            _context = context;
+            _db = _context.Set<T>();
+        }
+        public async Task Delete(int id)
+        {
+            //encuentro el dato que tenga el mismo id que el que estoy pasando por parametro
+            var entity = await _db.FindAsync(id);
+            _db.Remove(entity);
         }
 
-        public Task<T> Get(int id)
+        public async Task<T> Get(Expression<Func<T, bool>> expression, List<string> includes = null)
         {
-            throw new System.NotImplementedException();
+            IQueryable<T> query = _db;
+            if (includes != null)
+            {
+                foreach (var includesPropery in includes)
+                {
+                    query = query.Include(includesPropery);
+                }
+            }
+            return await query.AsNoTracking().FirstOrDefaultAsync(expression);
         }
 
-        public Task<IList<T>> GetAll()
+        public async Task<IList<T>> GetAll(Expression<Func<T, bool>> expression = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderby = null, List<string> includes = null)
         {
-            throw new System.NotImplementedException();
+            IQueryable<T> query = _db;
+
+            if (expression != null)
+            {
+                query = query.Where(expression);
+            }
+            if (includes != null)
+            {
+                foreach (var includesPropery in includes)
+                {
+                    query = query.Include(includesPropery);
+                }
+            }
+            if (orderby != null)
+            {
+                query = orderby(query);
+            }
+            return await query.AsNoTracking().ToListAsync();
         }
 
-        public Task Insert(T entity)
+        public async Task Insert(T entity)
         {
-            throw new System.NotImplementedException();
+            await _db.AddAsync(entity);
         }
 
-        public Task Update(T entity)
+        public void Update(T entity)
         {
-            throw new System.NotImplementedException();
+            _db.Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
         }
     }
 }

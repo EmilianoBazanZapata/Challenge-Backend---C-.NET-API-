@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class CreateDataBase : Migration
+    public partial class UpdateDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -63,24 +63,26 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CharacterMovie",
+                name: "CharactersAndMovies",
                 columns: table => new
                 {
-                    CharactersIdCaharacter = table.Column<int>(type: "int", nullable: false),
-                    MoviesIdMovie = table.Column<int>(type: "int", nullable: false)
+                    IdCharactersAndMovies = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdCharacter = table.Column<int>(type: "int", nullable: false),
+                    IdMovie = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CharacterMovie", x => new { x.CharactersIdCaharacter, x.MoviesIdMovie });
+                    table.PrimaryKey("PK_CharactersAndMovies", x => x.IdCharactersAndMovies);
                     table.ForeignKey(
-                        name: "FK_CharacterMovie_Characters_CharactersIdCaharacter",
-                        column: x => x.CharactersIdCaharacter,
+                        name: "FK_CharactersAndMovies_Characters_IdCharacter",
+                        column: x => x.IdCharacter,
                         principalTable: "Characters",
                         principalColumn: "IdCaharacter",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CharacterMovie_Movies_MoviesIdMovie",
-                        column: x => x.MoviesIdMovie,
+                        name: "FK_CharactersAndMovies_Movies_IdMovie",
+                        column: x => x.IdMovie,
                         principalTable: "Movies",
                         principalColumn: "IdMovie",
                         onDelete: ReferentialAction.Cascade);
@@ -98,9 +100,14 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CharacterMovie_MoviesIdMovie",
-                table: "CharacterMovie",
-                column: "MoviesIdMovie");
+                name: "IX_CharactersAndMovies_IdCharacter",
+                table: "CharactersAndMovies",
+                column: "IdCharacter");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CharactersAndMovies_IdMovie",
+                table: "CharactersAndMovies",
+                column: "IdMovie");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Movies_GenderId",
@@ -111,7 +118,7 @@ namespace API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CharacterMovie");
+                name: "CharactersAndMovies");
 
             migrationBuilder.DropTable(
                 name: "Characters");

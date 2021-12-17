@@ -7,10 +7,6 @@ namespace API.Data
 {
     public class Movie
     {
-        public Movie()
-        {
-            this.Characters = new HashSet<Character>();
-        }
         [Key]
         public int IdMovie { get; set; }
         [Required(ErrorMessage = "The Image Name is Required")]
@@ -25,6 +21,5 @@ namespace API.Data
         [Range(1, 5)]
         public int Qualification { get; set; }
         public Gender Gender { get; set; }
-        public virtual ICollection<Character> Characters { get; set; }
     }
 }

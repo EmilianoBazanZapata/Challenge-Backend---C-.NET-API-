@@ -6,6 +6,8 @@ namespace API.IRepository
 {
     public interface IMovieRepository
     {
-        Task<IEnumerable<Movie>> GetAllByInformation(string name,int idGender,string orderBy);
+        Task<IEnumerable<Movie>> GetAllByName(string name);
+        Task<IEnumerable<Movie>> GetAllByGender(int? gender);
+        Task<IEnumerable<Movie>> GetAllAndOrderBy(string order);
     }
 }

@@ -6,6 +6,9 @@ namespace API.IRepository
 {
     public interface ICharacterRepository
     {
-        Task<IEnumerable<Character>> GetByInformation(string name,int age, int idMovie);
+        Task<IEnumerable<Character>> GetByName(string name);
+        Task<IEnumerable<Character>> GetByAge(int? age);
+        Task<IEnumerable<Character>> GetByIdMovie(int? idMovie);
+
     }
 }
