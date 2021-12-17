@@ -10,7 +10,10 @@ namespace API.Repository
         private readonly DataBaseContext _context;
         private IGenericRepository<Character> _character;
         private IGenericRepository<Movie> _movie;
-
+        public UnitOfWork(DataBaseContext context)
+        {
+            _context = context;
+        }
         public IGenericRepository<Character> Characters => _character ??= new GenericRepository<Character>(_context);
         public IGenericRepository<Movie> Movies => _movie ??= new GenericRepository<Movie>(_context);
 
