@@ -1,5 +1,7 @@
 using API.Data;
 using API.Entities;
+using API.IRepository;
+using API.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,14 +34,27 @@ namespace API
             //agrego el contexto de la base de datos 
             services.AddDbContext<DataBaseContext>(options =>
                      options.UseSqlServer(Configuration.GetConnectionString("DB")));
+            //agrego la politica del cors
+            services.AddCors(o =>
+            {
+                o.AddPolicy("AllowAll", builder =>
+                 builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
             //agrego la referencia del automapper Initializer por inyeccion de dependencias
             services.AddAutoMapper(typeof(MapperInitializer));
+            //unit of work
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });
+
+            services.AddControllers().AddNewtonsoftJson(op =>
+            op.SerializerSettings.ReferenceLoopHandling =
+            Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,11 +63,16 @@ namespace API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
 
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
+
             app.UseHttpsRedirection();
+
+            //implemento la poitica de cors
+            app.UseCors("AllowAll");
 
             app.UseRouting();
 
@@ -60,6 +80,10 @@ namespace API
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
+                );
                 endpoints.MapControllers();
             });
         }

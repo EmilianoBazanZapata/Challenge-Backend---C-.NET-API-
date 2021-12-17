@@ -88,3 +88,17 @@ C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\obj\Deb
 C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\obj\Debug\net5.0\API.genruntimeconfig.cache
 C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\AutoMapper.dll
 C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Serilog.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Serilog.AspNetCore.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Serilog.Extensions.Hosting.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Serilog.Extensions.Logging.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Serilog.Formatting.Compact.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Serilog.Settings.Configuration.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Serilog.Sinks.Console.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Serilog.Sinks.Debug.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Serilog.Sinks.File.dll
