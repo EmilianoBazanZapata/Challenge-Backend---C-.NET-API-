@@ -29,17 +29,17 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetMovies()
         {
-            //try
-            //{
+            try
+            {
                 var movies = await _unitofwork.Movies.GetAll();
                 var results = _mapper.Map<IList<MovieDTO>>(movies);
                 return Ok(results);
-            //}
-            //catch (Exception ex)
-            //{
-            //    _logger.LogError($"Someting Went Wrong In The {nameof(GetMovies)}", ex);
-            //    return StatusCode(500, "Internal Server Error. Please Try Again Later");
-            //}
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Someting Went Wrong In The {nameof(GetMovies)}", ex);
+                return StatusCode(500, "Internal Server Error. Please Try Again Later");
+            }
         }
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -64,6 +64,23 @@ namespace API.Controllers
 
                 _logger.LogError($"Someting Went Wrong In The {nameof(GetMovies)}", ex);
                 return StatusCode(500, "Internal Server Error. Please Try Again Later");
+            }
+        }
+        [HttpGet("{id:int}", Name = "GetMovieById")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetMovieById(int id)
+        {
+            try
+            {
+                var Country = await _unitofwork.Movies.Get(q => q.IdMovie == id, new List<string> { "Gender" });
+                var result = _mapper.Map<MovieDTO>(Country);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Somehing Went Wrong in the {nameof(GetMovieById)}", ex);
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
     }

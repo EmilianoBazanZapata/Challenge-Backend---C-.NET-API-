@@ -25,7 +25,7 @@ namespace API.Models
     }
     public class MovieDTO : CreateMovieDTO
     {
-        public int Id { get; set; }
-        public CharacterDTO character { get; set; }
+        public int IdMovie { get; set; }
+        public Gender Gender { get; set; }
     }
 }
