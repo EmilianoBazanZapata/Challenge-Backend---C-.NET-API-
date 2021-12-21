@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace API.Repository
 {
-    public class MovieRepository : IMovieRepository
+    public class MovieRepository<T> : IMovieRepository<T> where T : class
     {
         private readonly DataBaseContext _context;
+        private readonly DbSet<T> _db;
         public MovieRepository(DataBaseContext context)
         {
             _context = context;
+            _db = _context.Set<T>();
         }
         public async Task<IEnumerable<Movie>> GetAllAndOrderBy(string order)
         {

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace API.IRepository
 {
-    public interface IMovieRepository
+    public interface IMovieRepository<T> where T : class
     {
         Task<IEnumerable<Movie>> GetAllByName(string name);
         Task<IEnumerable<Movie>> GetAllByGender(int? gender);

@@ -8,6 +8,7 @@ namespace API.IRepository
     {
         IGenericRepository<Character> Characters { get; }
         IGenericRepository<Movie> Movies { get; }
+        IMovieRepository<Movie> Movie { get; }
         Task Save();
     }
 }

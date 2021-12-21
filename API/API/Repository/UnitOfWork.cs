@@ -8,14 +8,17 @@ namespace API.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DataBaseContext _context;
-        private IGenericRepository<Character> _character;
-        private IGenericRepository<Movie> _movie;
+        private IGenericRepository<Character> _characters;
+        private IGenericRepository<Movie> _movies;
+        private IMovieRepository<Movie> _movie;
         public UnitOfWork(DataBaseContext context)
         {
             _context = context;
         }
-        public IGenericRepository<Character> Characters => _character ??= new GenericRepository<Character>(_context);
-        public IGenericRepository<Movie> Movies => _movie ??= new GenericRepository<Movie>(_context);
+        public IGenericRepository<Character> Characters => _characters ??= new GenericRepository<Character>(_context);
+        public IGenericRepository<Movie> Movies => _movies ??= new GenericRepository<Movie>(_context);
+
+        public IMovieRepository<Movie> Movie => _movie ??= new MovieRepository<Movie>(_context);
 
         public void Dispose()
         {

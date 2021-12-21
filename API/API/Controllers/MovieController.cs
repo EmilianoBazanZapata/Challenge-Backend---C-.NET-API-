@@ -25,6 +25,7 @@ namespace API.Controllers
             _mapper = mapper;
         }
         [HttpGet]
+        [Route("api/Movie/ListMovies")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetMovies()
@@ -42,6 +43,7 @@ namespace API.Controllers
             }
         }
         [HttpPost]
+        [Route("api/Movie/AddMovie")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -66,7 +68,8 @@ namespace API.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later");
             }
         }
-        [HttpGet("{id:int}", Name = "GetMovieById")]
+        [HttpGet]
+        [Route("api/Movie/SearchMovieById/{id}", Name = "GetMovieById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetMovieById(int id)
@@ -80,6 +83,24 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Somehing Went Wrong in the {nameof(GetMovieById)}", ex);
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
+        [HttpGet]
+        [Route("api/Movie/OrdeBy/{order}", Name = "MoviesOrderBy")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetMovieAndOrder(string order)
+        {
+            try
+            {
+                var Country = await _unitofwork.Movie.GetAllAndOrderBy(order);
+                var result = _mapper.Map<IList<MovieDTO>>(Country);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Somehing Went Wrong in the {nameof(GetMovieAndOrder)}", ex);
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
