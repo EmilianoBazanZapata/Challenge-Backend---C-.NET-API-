@@ -76,8 +76,8 @@ namespace API.Controllers
         {
             try
             {
-                var Country = await _unitofwork.Movies.Get(q => q.IdMovie == id, new List<string> { "Gender" });
-                var result = _mapper.Map<MovieDTO>(Country);
+                var Movie = await _unitofwork.Movies.Get(q => q.IdMovie == id, new List<string> { "Gender" });
+                var result = _mapper.Map<MovieDTO>(Movie);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -148,8 +148,8 @@ namespace API.Controllers
         {
             try
             {
-                var Country = await _unitofwork.Movie.GetAllByName(name);
-                var result = _mapper.Map<IList<MovieDTO>>(Country);
+                var Character = await _unitofwork.Movies.Get(q => q.Title == name, new List<string> { "Gender" });
+                var result = _mapper.Map<MovieDTO>(Character);
                 return Ok(result);
             }
             catch (Exception ex)

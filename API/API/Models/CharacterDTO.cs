@@ -31,6 +31,5 @@ namespace API.Models
     public class CharacterDTO : CreateCharacterDTO
     {
         public int IdCaharacter { get; set; }
-        public virtual IList<Movie> Movies { get; set; }
     }
 }

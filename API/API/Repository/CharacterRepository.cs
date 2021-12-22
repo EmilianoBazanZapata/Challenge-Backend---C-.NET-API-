@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace API.Repository
 {
-    public class CharacterRepository : ICharacterRepository
+    public class CharacterRepository<T> : ICharacterRepository<T> where T : class
     {
         private readonly DataBaseContext _context;
+        private readonly DbSet<T> _db;
         public CharacterRepository(DataBaseContext context)
         {
             _context = context;
+            _db = _context.Set<T>();
         }
 
         public async Task<IEnumerable<Character>> GetByAge(int? age)
@@ -30,12 +32,6 @@ namespace API.Repository
                          select Per);
             var lista = await query.ToListAsync();
             return lista;
-        }
-
-        public async Task<IEnumerable<Character>> GetByName(string name)
-        {
-            var result = await _context.Characters.Where(x => x.Name == name).ToListAsync();
-            return result;
         }
     }
 }

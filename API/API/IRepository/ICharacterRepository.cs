@@ -4,11 +4,9 @@ using System.Threading.Tasks;
 
 namespace API.IRepository
 {
-    public interface ICharacterRepository
+    public interface ICharacterRepository<T> where T : class
     {
-        Task<IEnumerable<Character>> GetByName(string name);
         Task<IEnumerable<Character>> GetByAge(int? age);
         Task<IEnumerable<Character>> GetByIdMovie(int? idMovie);
-
     }
 }

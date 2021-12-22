@@ -9,6 +9,7 @@ namespace API.IRepository
         IGenericRepository<Character> Characters { get; }
         IGenericRepository<Movie> Movies { get; }
         IMovieRepository<Movie> Movie { get; }
+        ICharacterRepository<Character> Character { get; }
         Task Save();
     }
 }

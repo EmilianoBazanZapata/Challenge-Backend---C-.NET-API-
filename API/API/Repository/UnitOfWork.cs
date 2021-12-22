@@ -11,6 +11,7 @@ namespace API.Repository
         private IGenericRepository<Character> _characters;
         private IGenericRepository<Movie> _movies;
         private IMovieRepository<Movie> _movie;
+        private ICharacterRepository<Character> _character;
         public UnitOfWork(DataBaseContext context)
         {
             _context = context;
@@ -19,6 +20,8 @@ namespace API.Repository
         public IGenericRepository<Movie> Movies => _movies ??= new GenericRepository<Movie>(_context);
 
         public IMovieRepository<Movie> Movie => _movie ??= new MovieRepository<Movie>(_context);
+
+        public ICharacterRepository<Character> Character => _character ??= new CharacterRepository<Character>(_context);
 
         public void Dispose()
         {

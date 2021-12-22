@@ -39,11 +39,5 @@ namespace API.Repository
             var result = await _context.Movies.Where(x => x.Gender.IdGender == gender).ToListAsync();
             return result;
         }
-
-        public async Task<IEnumerable<Movie>> GetAllByName(string name)
-        {
-            var result = await _context.Movies.Where(x => x.Title == name).ToListAsync();
-            return result;
-        }
     }
 }
