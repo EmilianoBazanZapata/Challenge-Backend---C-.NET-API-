@@ -64,7 +64,7 @@ namespace API.Controllers
             catch (Exception ex)
             {
 
-                _logger.LogError($"Someting Went Wrong In The {nameof(GetMovies)}", ex);
+                _logger.LogError($"Someting Went Wrong In The {nameof(AddMovie)}", ex);
                 return StatusCode(500, "Internal Server Error. Please Try Again Later");
             }
         }

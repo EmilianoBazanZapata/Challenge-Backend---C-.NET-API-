@@ -22,7 +22,7 @@ namespace API.Models
         [Range(1, 110)]
         public int Age { get; set; }
         [Required(ErrorMessage = "Weight is Required")]
-        [Range(1, 100)]
+        [Range(1, 999)]
         public float Weight { get; set; }
         [Required(ErrorMessage = "The History is Required")]
         [MaxLength(5000, ErrorMessage = "Character History Is Too Long")]

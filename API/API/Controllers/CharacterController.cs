@@ -1,4 +1,5 @@
-﻿using API.IRepository;
+﻿using API.Data;
+using API.IRepository;
 using API.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -22,7 +23,7 @@ namespace API.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        [Route("api/Movie/ListCharacters")]
+        [Route("api/Character/ListCharacters")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetCharacters()
@@ -36,6 +37,32 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Someting Went Wrong In The {nameof(GetCharacters)}", ex);
+                return StatusCode(500, "Internal Server Error. Please Try Again Later");
+            }
+        }
+        [HttpPost]
+        [Route("api/Character/AddCharacter")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> AddMovie([FromBody] CreateCharacterDTO characterDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError($"Invalid POST attempt in{nameof(AddMovie)}");
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var character = _mapper.Map<Character>(characterDTO);
+                await _unitofwork.Characters.Insert(character);
+                await _unitofwork.Save();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError($"Someting Went Wrong In The {nameof(AddMovie)}", ex);
                 return StatusCode(500, "Internal Server Error. Please Try Again Later");
             }
         }
