@@ -87,6 +87,24 @@ namespace API.Controllers
             }
         }
         [HttpGet]
+        [Route("api/Movie/SearchDetalMovie/{id}", Name = "GetDetailMovieById")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetDetailMovieById(int id)
+        {
+            try
+            {
+                var Country = await _unitofwork.Movies.Get(q => q.IdMovie == id, new List<string> { "Gender" });
+                var result = _mapper.Map<MovieDTO>(Country);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Somehing Went Wrong in the {nameof(GetMovieById)}", ex);
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
+        [HttpGet]
         [Route("api/Movie/OrdeBy/{order}", Name = "MoviesOrderBy")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

@@ -8,7 +8,7 @@ namespace API.Models
     {
         [Required(ErrorMessage = "The Image Name is Required")]
         [MaxLength(1000, ErrorMessage = "Gender Name Is Too Long")]
-        [MinLength(2,ErrorMessage ="Gender Name Is Too Short")]
+        [MinLength(2, ErrorMessage = "Gender Name Is Too Short")]
         public string Image { get; set; }
         [Required(ErrorMessage = "The Name is Required")]
         [MaxLength(250, ErrorMessage = "Character Name Is Too Long")]
@@ -28,9 +28,9 @@ namespace API.Models
         [MaxLength(5000, ErrorMessage = "Character History Is Too Long")]
         public string History { get; set; }
     }
-    public class CharacterDTO
+    public class CharacterDTO : CreateCharacterDTO
     {
-        public int Id { get; set; }
+        public int IdCaharacter { get; set; }
         public virtual IList<Movie> Movies { get; set; }
     }
 }
