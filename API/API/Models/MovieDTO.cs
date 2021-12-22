@@ -23,6 +23,10 @@ namespace API.Models
         public int Qualification { get; set; }
         public int GenderId { get; set; }
     }
+    public class UpdateMovieDTO : CreateMovieDTO
+    {
+
+    }
     public class MovieDTO : CreateMovieDTO
     {
         public int IdMovie { get; set; }
