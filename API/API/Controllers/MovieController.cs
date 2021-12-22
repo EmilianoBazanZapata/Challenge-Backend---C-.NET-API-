@@ -104,5 +104,41 @@ namespace API.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
+        [HttpGet]
+        [Route("api/Movie/SearchMovieByGender/{idGender}", Name = "MoviesByGender")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetMovieByGender(int idGender)
+        {
+            try
+            {
+                var Country = await _unitofwork.Movie.GetAllByGender(idGender);
+                var result = _mapper.Map<IList<MovieDTO>>(Country);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Somehing Went Wrong in the {nameof(GetMovieById)}", ex);
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
+        [HttpGet]
+        [Route("api/Movie/SearchMovieByName/{name}", Name = "GetMovieByName")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetMovieByName(string name)
+        {
+            try
+            {
+                var Country = await _unitofwork.Movie.GetAllByName(name);
+                var result = _mapper.Map<IList<MovieDTO>>(Country);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Somehing Went Wrong in the {nameof(GetMovieByName)}", ex);
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
     }
 }
