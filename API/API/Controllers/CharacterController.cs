@@ -102,5 +102,23 @@ namespace API.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later");
             }
         }
+        [HttpGet]
+        [Route("api/Character/SearchChanacterByMovie/{movie}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetCharacterByMovie(int movie)
+        {
+            try
+            {
+                var Character = await _unitofwork.Character.GetByIdMovie(movie);
+                var result = _mapper.Map<IList<CharacterDTO>>(Character);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Someting Went Wrong In The {nameof(GetCharacterByMovie)}", ex);
+                return StatusCode(500, "Internal Server Error. Please Try Again Later");
+            }
+        }
     }
 }
