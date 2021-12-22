@@ -45,11 +45,11 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> AddMovie([FromBody] CreateCharacterDTO characterDTO)
+        public async Task<IActionResult> AddCharacter([FromBody] CreateCharacterDTO characterDTO)
         {
             if (!ModelState.IsValid)
             {
-                _logger.LogError($"Invalid POST attempt in{nameof(AddMovie)}");
+                _logger.LogError($"Invalid POST attempt in{nameof(AddCharacter)}");
                 return BadRequest(ModelState);
             }
             try
@@ -62,7 +62,7 @@ namespace API.Controllers
             catch (Exception ex)
             {
 
-                _logger.LogError($"Someting Went Wrong In The {nameof(AddMovie)}", ex);
+                _logger.LogError($"Someting Went Wrong In The {nameof(AddCharacter)}", ex);
                 return StatusCode(500, "Internal Server Error. Please Try Again Later");
             }
         }
@@ -148,6 +148,35 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Something Went Wrong in the {nameof(UpdateCharacter)}", ex);
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
+        [HttpDelete]
+        [Route("api/Character/DeleteCharacter/{idDelete}")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteCharacter(int idDelete)
+        {
+            if (idDelete < 1)
+            {
+                _logger.LogError($"Invalid DELETE attempt in {nameof(DeleteCharacter)}");
+                return BadRequest();
+            }
+            try
+            {
+                var character = await _unitofwork.Characters.Get(x => x.IdCaharacter == idDelete);
+                if (character == null)
+                {
+                    return BadRequest("Submmited data is Invalid");
+                }
+                await _unitofwork.Characters.Delete(idDelete);
+                await _unitofwork.Save();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something Went Wrong in the {nameof(DeleteCharacter)}", ex);
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
