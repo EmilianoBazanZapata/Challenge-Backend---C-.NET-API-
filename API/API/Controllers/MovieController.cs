@@ -142,7 +142,8 @@ namespace API.Controllers
         }
         [HttpPut]
         [Route("api/Movie/UpdateMovie/{idUpdate}", Name = "UpdateMovie")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateMovie(int idUpdate, [FromBody] UpdateMovieDTO movieDTO)
         {
@@ -171,6 +172,35 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Something Went Wrong in the {nameof(UpdateMovie)}", ex);
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
+        [HttpDelete]
+        [Route("api/Movie/DeleteMovie/{idDelete}", Name = "DeleteMovie")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteMovie(int idDelete)
+        {
+            if (idDelete < 1) 
+            {
+                _logger.LogError($"Invalid DELETE attempt in {nameof(DeleteMovie)}");
+                return BadRequest();
+            }
+            try
+            {
+                var movie = await _unitofwork.Movies.Get(x=>x.IdMovie == idDelete);
+                if (movie == null)
+                {
+                    return BadRequest("Submmited data is Invalid");
+                }
+                await _unitofwork.Movies.Delete(idDelete);
+                await _unitofwork.Save();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something Went Wrong in the {nameof(DeleteMovie)}", ex);
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
