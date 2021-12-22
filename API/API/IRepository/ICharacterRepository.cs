@@ -6,7 +6,6 @@ namespace API.IRepository
 {
     public interface ICharacterRepository<T> where T : class
     {
-        Task<IEnumerable<Character>> GetByAge(int? age);
         Task<IEnumerable<Character>> GetByIdMovie(int? idMovie);
     }
 }

@@ -84,5 +84,23 @@ namespace API.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later");
             }
         }
+        [HttpGet]
+        [Route("api/Character/SearchChanacterByAge/{age}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetCharacterByAge(int age)
+        {
+            try
+            {
+                var Character = await _unitofwork.Characters.Get(q => q.Age == age);
+                var result = _mapper.Map<CharacterDTO>(Character);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Someting Went Wrong In The {nameof(GetCharacterByName)}", ex);
+                return StatusCode(500, "Internal Server Error. Please Try Again Later");
+            }
+        }
     }
 }

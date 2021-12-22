@@ -16,13 +16,6 @@ namespace API.Repository
             _context = context;
             _db = _context.Set<T>();
         }
-
-        public async Task<IEnumerable<Character>> GetByAge(int? age)
-        {
-            var result = await _context.Characters.Where(x => x.Age == age).ToListAsync();
-            return result;
-        }
-
         public async Task<IEnumerable<Character>> GetByIdMovie(int? idMovie)
         {
             var query = (from Per in _context.Characters
