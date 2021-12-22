@@ -120,5 +120,36 @@ namespace API.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later");
             }
         }
+        [HttpPut]
+        [Route("api/Character/UpdateCharacter/{idUpdate}")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdateCharacter(int idUpdate, [FromBody] UpdateCharacterDTO movieDTO)
+        {
+            if (!ModelState.IsValid || idUpdate < 1)
+            {
+                _logger.LogError($"Invalid UPDATE attempt in {nameof(UpdateCharacter)}");
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var character = await _unitofwork.Characters.Get(x => x.IdCaharacter == idUpdate);
+                if (character == null)
+                {
+                    _logger.LogError($"Invalid UPDATE attempt in {nameof(UpdateCharacter)}");
+                    return BadRequest("Submitted data is Invalid");
+                }
+                _mapper.Map(movieDTO, character);
+                _unitofwork.Characters.Update(character);
+                await _unitofwork.Save();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something Went Wrong in the {nameof(UpdateCharacter)}", ex);
+                return StatusCode(500, "Internal Server Error. Please Try Again Later.");
+            }
+        }
     }
 }

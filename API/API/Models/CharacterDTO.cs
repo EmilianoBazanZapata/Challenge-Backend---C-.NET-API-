@@ -28,6 +28,10 @@ namespace API.Models
         [MaxLength(5000, ErrorMessage = "Character History Is Too Long")]
         public string History { get; set; }
     }
+    public class UpdateCharacterDTO : CreateCharacterDTO 
+    {
+
+    }
     public class CharacterDTO : CreateCharacterDTO
     {
         public int IdCaharacter { get; set; }
