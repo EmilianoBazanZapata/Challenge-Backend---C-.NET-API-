@@ -21,15 +21,18 @@ namespace API.Controllers
         private readonly ILogger<AcountController> _logger;
         private readonly IMapper _mapper;
         private readonly IAuthManager _authManager;
+        private readonly IEmailSender _emailSender;
         public AcountController(UserManager<ApiUser> userManager,
                                 ILogger<AcountController> logger,
                                 IMapper mapper,
-                                IAuthManager authManager)
+                                IAuthManager authManager,
+                                IEmailSender emailSender)
         {
             _userManager = userManager;
             _logger = logger;
             _mapper = mapper;
             _authManager = authManager;
+            _emailSender = emailSender;
         }
         [HttpPost]
         [Route("Register")]
@@ -38,6 +41,7 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Register([FromBody] UserDTO userDTO)
         {
+
             _logger.LogInformation($"Registration Attempt for {userDTO}");
             if (!ModelState.IsValid)
             {
@@ -58,6 +62,7 @@ namespace API.Controllers
                     return BadRequest(ModelState);
                 }
                 await _userManager.AddToRolesAsync(user, userDTO.Roles);
+                await _emailSender.SendEmailAsync(userDTO.Email, "Bienvenido a Disney", "Gracias por inscribirse al sistema de peliculas de Disney, desde ya muchas gracias y ahora a disfrutar de su subscripcion");
                 return Accepted($"successfully registered user");
 
             }

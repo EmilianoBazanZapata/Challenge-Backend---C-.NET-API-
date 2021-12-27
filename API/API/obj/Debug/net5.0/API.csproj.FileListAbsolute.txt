@@ -109,3 +109,5 @@ C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Deb
 C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\SendGrid.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\StarkbankEcdsa.dll
