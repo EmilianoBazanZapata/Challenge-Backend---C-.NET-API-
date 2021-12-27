@@ -102,3 +102,10 @@ C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Deb
 C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Serilog.Sinks.Console.dll
 C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Serilog.Sinks.Debug.dll
 C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Serilog.Sinks.File.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Emiliano\Desktop\ALKEMY\Challenge-Backend---C-.NET-API-\API\API\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll

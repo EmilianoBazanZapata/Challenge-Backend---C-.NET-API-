@@ -1,9 +1,10 @@
 ﻿using API.Configurations.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class DataBaseContext : DbContext
+    public class DataBaseContext : IdentityDbContext<ApiUser>
     {
         public DataBaseContext(DbContextOptions options) : base(options)
         {
@@ -19,6 +20,7 @@ namespace API.Data
         {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new GenderConfiguration());
+            builder.ApplyConfiguration(new RoleConfiguration());
         }
     }
 }

@@ -2,9 +2,11 @@ using API.Data;
 using API.Entities;
 using API.IRepository;
 using API.Repository;
+using API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +36,12 @@ namespace API
             //agrego el contexto de la base de datos 
             services.AddDbContext<DataBaseContext>(options =>
                      options.UseSqlServer(Configuration.GetConnectionString("DB")));
+            //autenticacion
+            services.AddAuthentication();
+            //ConfiguracionIdentity
+            services.ConfigureIdentity();
+            //configuracion del jwt
+            services.ConfigureJWT(Configuration);
             //agrego la politica del cors
             services.AddCors(o =>
             {
@@ -46,6 +54,8 @@ namespace API
             services.AddAutoMapper(typeof(MapperInitializer));
             //unit of work
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            //AuthManager
+            services.AddScoped<IAuthManager, AuthManager>();
 
             services.AddSwaggerGen(c =>
             {
@@ -75,6 +85,8 @@ namespace API
             app.UseCors("AllowAll");
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

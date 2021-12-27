@@ -2,6 +2,7 @@
 using API.IRepository;
 using API.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -22,6 +23,7 @@ namespace API.Controllers
             _logger = logger;
             _mapper = mapper;
         }
+        [Authorize]
         [HttpGet]
         [Route("api/Character/ListCharacters")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -41,6 +43,7 @@ namespace API.Controllers
             }
         }
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         [Route("api/Character/AddCharacter")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -67,6 +70,7 @@ namespace API.Controllers
             }
         }
         [HttpGet]
+        [Authorize]
         [Route("api/Character/SearchChanacterByName/{name}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -85,6 +89,7 @@ namespace API.Controllers
             }
         }
         [HttpGet]
+        [Authorize]
         [Route("api/Character/SearchChanacterByAge/{age}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -103,6 +108,7 @@ namespace API.Controllers
             }
         }
         [HttpGet]
+        [Authorize]
         [Route("api/Character/SearchChanacterByMovie/{movie}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -121,6 +127,7 @@ namespace API.Controllers
             }
         }
         [HttpPut]
+        [Authorize(Roles = "Administrator")]
         [Route("api/Character/UpdateCharacter/{idUpdate}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -152,6 +159,7 @@ namespace API.Controllers
             }
         }
         [HttpDelete]
+        [Authorize(Roles = "Administrator")]
         [Route("api/Character/DeleteCharacter/{idDelete}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

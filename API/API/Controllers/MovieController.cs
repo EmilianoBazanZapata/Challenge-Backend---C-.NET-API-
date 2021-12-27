@@ -2,6 +2,7 @@
 using API.IRepository;
 using API.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -24,6 +25,7 @@ namespace API.Controllers
             _logger = logger;
             _mapper = mapper;
         }
+        [Authorize]
         [HttpGet]
         [Route("api/Movie/ListMovies")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -42,6 +44,7 @@ namespace API.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later");
             }
         }
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [Route("api/Movie/AddMovie")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -68,6 +71,7 @@ namespace API.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later");
             }
         }
+        [Authorize]
         [HttpGet]
         [Route("api/Movie/SearchMovieById/{id}", Name = "GetMovieById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -86,6 +90,7 @@ namespace API.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
+        [Authorize]
         [HttpGet]
         [Route("api/Movie/SearchDetalMovie/{id}", Name = "GetDetailMovieById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -104,6 +109,7 @@ namespace API.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
+        [Authorize]
         [HttpGet]
         [Route("api/Movie/OrdeBy/{order}", Name = "MoviesOrderBy")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -122,6 +128,7 @@ namespace API.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
+        [Authorize]
         [HttpGet]
         [Route("api/Movie/SearchMovieByGender/{idGender}", Name = "MoviesByGender")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -140,6 +147,7 @@ namespace API.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
+        [Authorize]
         [HttpGet]
         [Route("api/Movie/SearchMovieByName/{name}", Name = "GetMovieByName")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -158,6 +166,7 @@ namespace API.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
+        [Authorize(Roles = "Administrator")]
         [HttpPut]
         [Route("api/Movie/UpdateMovie/{idUpdate}", Name = "UpdateMovie")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -193,6 +202,7 @@ namespace API.Controllers
                 return StatusCode(500, "Internal Server Error. Please Try Again Later.");
             }
         }
+        [Authorize(Roles = "Administrator")]
         [HttpDelete]
         [Route("api/Movie/DeleteMovie/{idDelete}", Name = "DeleteMovie")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

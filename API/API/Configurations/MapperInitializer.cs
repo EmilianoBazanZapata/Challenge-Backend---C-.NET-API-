@@ -11,6 +11,7 @@ namespace API.Entities
             CreateMap<Character, CreateCharacterDTO>().ReverseMap();
             CreateMap<Movie, MovieDTO>().ReverseMap();
             CreateMap<Movie, CreateMovieDTO>().ReverseMap();
+            CreateMap<ApiUser, UserDTO>().ReverseMap();
         }
     }
 }
