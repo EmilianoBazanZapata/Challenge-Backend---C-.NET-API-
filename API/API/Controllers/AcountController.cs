@@ -62,7 +62,7 @@ namespace API.Controllers
                     return BadRequest(ModelState);
                 }
                 await _userManager.AddToRolesAsync(user, userDTO.Roles);
-                await _emailSender.SendEmailAsync(userDTO.Email, "Bienvenido a Disney", "Gracias por inscribirse al sistema de peliculas de Disney, desde ya muchas gracias y ahora a disfrutar de su subscripcion");
+                await _emailSender.SendEmailAsync(userDTO.Email, "Bienvenido a Disney", "Gracias por inscribirse al sistema de peliculas de Disney, desde ya muchas gracias y ahora a disfrutar de su subcripcion");
                 return Accepted($"successfully registered user");
 
             }
