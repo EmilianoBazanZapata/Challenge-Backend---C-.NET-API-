@@ -1,3 +1,4 @@
+using Amazon.S3;
 using API.Data;
 using API.Entities;
 using API.IRepository;
@@ -61,6 +62,8 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });
+            //amazon images
+            services.AddAWSService<IAmazonS3>();
 
             services.AddControllers().AddNewtonsoftJson(op =>
             op.SerializerSettings.ReferenceLoopHandling =

@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "k0AX7GyLDF8F3IkwBpjEw2YFAch7PHKCFOkRwEeQiD7SofpsqD4KzbNqyhGFoRda60d7WhlUEGbGMNwlVP8pBA==",
+  "dgSpecHash": "eqYjHz48R0R1tkJG14wgffM/K/daJ2zlNh5MWVDrA0II2MQpYJ5AUVo1p9de8gj501TGXLA72cvTdD2zHT1a0A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Emiliano\\Desktop\\ALKEMY\\Challenge-Backend---C-.NET-API-\\API\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Emiliano\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Emiliano\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
+    "C:\\Users\\Emiliano\\.nuget\\packages\\awssdk.core\\3.7.5.8\\awssdk.core.3.7.5.8.nupkg.sha512",
+    "C:\\Users\\Emiliano\\.nuget\\packages\\awssdk.extensions.netcore.setup\\3.7.1\\awssdk.extensions.netcore.setup.3.7.1.nupkg.sha512",
+    "C:\\Users\\Emiliano\\.nuget\\packages\\awssdk.s3\\3.7.7.5\\awssdk.s3.3.7.7.5.nupkg.sha512",
     "C:\\Users\\Emiliano\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Emiliano\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.12\\microsoft.aspnetcore.authentication.jwtbearer.5.0.12.nupkg.sha512",
     "C:\\Users\\Emiliano\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\5.0.12\\microsoft.aspnetcore.authentication.openidconnect.5.0.12.nupkg.sha512",

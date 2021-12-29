@@ -42,36 +42,36 @@ namespace API.Controllers
         public async Task<IActionResult> Register([FromBody] UserDTO userDTO)
         {
 
-            _logger.LogInformation($"Registration Attempt for {userDTO}");
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            try
-            {
-                var user = _mapper.Map<ApiUser>(userDTO);
-                user.UserName = userDTO.Email;
-                user.FisrtName = userDTO.FirstName;
-                var result = await _userManager.CreateAsync(user, userDTO.Password);
-                if (!result.Succeeded)
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(error.Code, error.Description);
-                    }
-                    return BadRequest(ModelState);
-                }
-                await _userManager.AddToRolesAsync(user, userDTO.Roles);
+            //_logger.LogInformation($"Registration Attempt for {userDTO}");
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+            //try
+            //{
+            //    var user = _mapper.Map<ApiUser>(userDTO);
+            //    user.UserName = userDTO.Email;
+            //    user.FisrtName = userDTO.FirstName;
+            //    var result = await _userManager.CreateAsync(user, userDTO.Password);
+            //    if (!result.Succeeded)
+            //    {
+            //        foreach (var error in result.Errors)
+            //        {
+            //            ModelState.AddModelError(error.Code, error.Description);
+            //        }
+            //        return BadRequest(ModelState);
+            //    }
+            //    await _userManager.AddToRolesAsync(user, userDTO.Roles);
                 await _emailSender.SendEmailAsync(userDTO.Email, "Bienvenido a Disney", "Gracias por inscribirse al sistema de peliculas de Disney, desde ya muchas gracias y ahora a disfrutar de su subcripcion");
                 return Accepted($"successfully registered user");
 
-            }
-            catch (Exception ex)
-            {
+            //}
+            //catch (Exception ex)
+            //{
 
-                _logger.LogError(ex, $"Something Went Wrong in the {nameof(Register)}");
-                return Problem($"Something Went Wrong in the {nameof(Register)}", statusCode: 500);
-            }
+            //    _logger.LogError(ex, $"Something Went Wrong in the {nameof(Register)}");
+            //    return Problem($"Something Went Wrong in the {nameof(Register)}", statusCode: 500);
+            //}
         }
         [HttpPost]
         [Route("login")]
