@@ -30,7 +30,7 @@ namespace API.Controllers
             return Ok(result);
         }
         [HttpGet]
-        public async Task<IActionResult> GetImage(string file)
+        public async Task<IActionResult> GetImage([FromQuery]string file)
         {
             var request = new GetObjectRequest()
             {
@@ -40,13 +40,24 @@ namespace API.Controllers
             using GetObjectResponse response = await this._amazonS3.GetObjectAsync(request);
             using Stream responseStream = response.ResponseStream;
             var stream = new MemoryStream();
-            await responseStream.CopyToAsync(stream);   
+            await responseStream.CopyToAsync(stream);
             stream.Position = 0;
 
             return new FileStreamResult(stream, response.Headers["Content-Type"])
             {
                 FileDownloadName = file
             };
+        }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteImage([FromQuery] string file) 
+        {
+            var request = new DeleteObjectRequest()
+            {
+                BucketName = "apidisney546",
+                Key = file
+            };
+            var response = await _amazonS3.DeleteObjectAsync(request);
+            return Ok(response);    
         }
     }
 }
