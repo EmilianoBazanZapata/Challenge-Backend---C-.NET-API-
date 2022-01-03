@@ -12,6 +12,7 @@ namespace API.Entities
             CreateMap<Movie, MovieDTO>().ReverseMap();
             CreateMap<Movie, CreateMovieDTO>().ReverseMap();
             CreateMap<ApiUser, UserDTO>().ReverseMap();
+            CreateMap<CharactersAndMovies, MovieAndCharactersDTO>().ReverseMap();
         }
     }
 }

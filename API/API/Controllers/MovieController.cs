@@ -59,6 +59,9 @@ namespace API.Controllers
             }
             try
             {
+                string image = movieDTO.Image;
+                string linkImage = "https://apidisney546.s3.us-east-2.amazonaws.com/";
+                movieDTO.Image = linkImage + image;
                 var movie = _mapper.Map<Movie>(movieDTO);
                 await _unitofwork.Movies.Insert(movie);
                 await _unitofwork.Save();

@@ -10,6 +10,7 @@ namespace API.Repository
         private readonly DataBaseContext _context;
         private IGenericRepository<Character> _characters;
         private IGenericRepository<Movie> _movies;
+        private IGenericRepository<CharactersAndMovies> _moviesandcharacters;
         private IMovieRepository<Movie> _movie;
         private ICharacterRepository<Character> _character;
         public UnitOfWork(DataBaseContext context)
@@ -22,6 +23,8 @@ namespace API.Repository
         public IMovieRepository<Movie> Movie => _movie ??= new MovieRepository<Movie>(_context);
 
         public ICharacterRepository<Character> Character => _character ??= new CharacterRepository<Character>(_context);
+
+        public IGenericRepository<CharactersAndMovies> CharactersAndMovies => _moviesandcharacters ??= new GenericRepository<CharactersAndMovies>(_context);
 
         public void Dispose()
         {

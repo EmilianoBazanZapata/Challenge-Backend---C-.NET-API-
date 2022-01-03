@@ -23,7 +23,7 @@ namespace API.Controllers
             _logger = logger;
             _mapper = mapper;
         }
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         [Route("api/Character/ListCharacters")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -43,7 +43,7 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         [Route("api/Character/AddCharacter")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -55,8 +55,16 @@ namespace API.Controllers
                 _logger.LogError($"Invalid POST attempt in{nameof(AddCharacter)}");
                 return BadRequest(ModelState);
             }
+            if (characterDTO.Image.Contains(" ")) 
+            {
+                _logger.LogError($"Invalid POST attempt in{nameof(AddCharacter)}");
+                return BadRequest("Delete Spaces In Name Of The Image");
+            }
             try
             {
+                string image = characterDTO.Image;
+                string linkImage = "https://apidisney546.s3.us-east-2.amazonaws.com/";
+                characterDTO.Image = linkImage + image;
                 var character = _mapper.Map<Character>(characterDTO);
                 await _unitofwork.Characters.Insert(character);
                 await _unitofwork.Save();
@@ -70,7 +78,7 @@ namespace API.Controllers
             }
         }
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         [Route("api/Character/SearchChanacterByName/{name}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -89,7 +97,7 @@ namespace API.Controllers
             }
         }
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         [Route("api/Character/SearchChanacterByAge/{age}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -108,7 +116,7 @@ namespace API.Controllers
             }
         }
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         [Route("api/Character/SearchChanacterByMovie/{movie}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -127,7 +135,7 @@ namespace API.Controllers
             }
         }
         [HttpPut]
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         [Route("api/Character/UpdateCharacter/{idUpdate}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -159,7 +167,7 @@ namespace API.Controllers
             }
         }
         [HttpDelete]
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         [Route("api/Character/DeleteCharacter/{idDelete}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
